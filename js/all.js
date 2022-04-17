@@ -125,8 +125,14 @@ sortable.on('drag:start', (evt) => {
   // 取得被拖曳的 li
   const draggableLi = evt.data.sensorEvent.data.target; 
   // 若為已經完成的項目不可拖曳
-  const targetIsDone = draggableLi.classList.contains('task-done')
+  const targetIsDone = draggableLi.classList.contains('task-done');
   if (targetIsDone) {
+    evt.cancel();
+  }
+  // 確認及刪除項目
+  const isDone = draggableLi.classList.contains('task-text');
+  const isDelete = draggableLi.classList.contains('task-del-js');
+  if (isDone || isDelete) {
     evt.cancel();
   }
   // 取得緊急與重要的數量及限制
